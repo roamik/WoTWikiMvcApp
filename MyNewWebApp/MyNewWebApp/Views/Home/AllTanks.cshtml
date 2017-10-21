@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MyNewWebApp.Models.Tank>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Current Tanks in DB</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>
+                        Tank
+                    </th>
+                    <th>
+                        Nation
+                    </th>
+                    <th>
+                        <p><a class="btn btn-default" href="http://localhost:49867/Home/AddTank">+ &raquo;</a></p>
+                    </th>
+                  </tr>
+
+
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TankName)
+                        </td>
+                        <td>  
+                                @Html.Raw("<img style='width:80px; height:60px;' src=\"data:image/jpeg;base64," + Convert.ToBase64String(item.Image) + "\" />")      
+                        </td>
+                        <td>
+                            @Html.ActionLink("EditTank", "EditTank", new {id = item.TankId })
+                        </td>
+                    </tr>
+                    }
+        </table>
+    </div>
+</div>
+

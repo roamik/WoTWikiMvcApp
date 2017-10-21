@@ -1,0 +1,51 @@
+﻿@model MyNewWebApp.Models.Tank
+
+@{
+    ViewBag.Title = "Editing menu.";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tank - @Model.TankName</h2>
+
+@{
+        string imageBase64 = Convert.ToBase64String(Model.Image);
+        string imageSrc = string.Format("data:image/gif;base64,{0}", imageBase64);
+}
+
+@using (Html.BeginForm("EditTank", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <form>
+        <fieldset>
+            @Html.HiddenFor(m => m.TankId)
+
+            <p>
+                @Html.LabelFor(m => m.TankName, "Tank name:")
+                <br />
+                @Html.EditorFor(m => m.TankName)
+            </p>
+            <p>
+                @Html.LabelFor(m => m.TankNation, "Nation:")
+                <br />
+                @Html.EditorFor(m => m.TankNation)
+            </p>
+            <p>
+                @Html.LabelFor(m => m.TankDescription, "Description:")
+                <br />
+                @Html.EditorFor(m => m.TankDescription)
+            </p>
+            <p>
+                <h2>@Model.TankName Current Image:</h2>
+                @Html.HiddenFor(m => m.Image)
+                <br />
+                <img src="@imageSrc" width="160" height="100" />
+                <br /><h2>Change image:</h2>
+                <div class="editor-label">Image File</div>
+                <div class="editor-field">
+                    <input type="file" name="uploadImg" />
+                </div>
+            </p>
+
+            <p><input type="submit" value="Ready!" /></p>
+        </fieldset>
+    </form>
+}

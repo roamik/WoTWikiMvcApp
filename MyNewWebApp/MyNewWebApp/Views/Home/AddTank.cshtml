@@ -1,0 +1,46 @@
+﻿@model MyNewWebApp.Models.Tank
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm("CreateTank", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Add new Tank</legend>
+
+        <div class="editor-label">Name</div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TankName)
+            <br />
+            @Html.ValidationMessageFor(model => model.TankName)
+        </div>
+
+        <div class="editor-label">Nation</div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TankNation)
+            <br />
+            @Html.ValidationMessageFor(model => model.TankNation)
+        </div>
+
+        <div class="editor-label">Tank Image</div>
+        <div class="editor-field">
+            <input type="file" name="uploadImage" />
+        </div>
+
+        <p>
+            <br />
+            <input type="submit" value="Submit" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
